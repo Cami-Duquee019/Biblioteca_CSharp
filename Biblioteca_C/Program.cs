@@ -128,6 +128,88 @@ void EditBookAuthor() => Console.WriteLine("Acción seleccionada: editar autor d
 void EditBookYearCategory() => Console.WriteLine("Acción seleccionada: editar año/categoría del libro.");
 void DeleteBook() => Console.WriteLine("Acción seleccionada: eliminar libro. Validar no permitir si está prestado.");
 
+void ShowUsersMenu()
+{
+    var opcion = "";
+    do
+    {
+        Console.WriteLine("\n--------- MENÚ USUARIOS ---------");
+        Console.WriteLine("2.1 Registrar usuario");
+        Console.WriteLine("2.2 Listar usuarios");
+        Console.WriteLine("2.3 Ver detalle (por ID/documento)");
+        Console.WriteLine("2.4 Actualizar usuario");
+        Console.WriteLine("2.5 Eliminar usuario");
+        Console.WriteLine("0. Volver");
+        Console.Write("Elige una opción: ");
+        opcion = Console.ReadLine()?.Trim() ?? "";
+
+        switch (opcion)
+        {
+            case "2.1":
+                RegisterUser();
+                break;
+            case "2.2":
+                ListUsers();
+                break;
+            case "2.3":
+                ViewUserDetail();
+                break;
+            case "2.4":
+                UpdateUserMenu();
+                break;
+            case "2.5":
+                DeleteUser();
+                break;
+            case "0":
+                break;
+            default:
+                Console.WriteLine("Opción no válida. Intenta de nuevo.");
+                break;
+        }
+    } while (opcion != "0");
+}
+
+void UpdateUserMenu()
+{
+    var opcion = "";
+    do
+    {
+        Console.WriteLine("\n--------- ACTUALIZAR USUARIO ---------");
+        Console.WriteLine("2.4.1 Editar nombre");
+        Console.WriteLine("2.4.2 Editar contacto");
+        Console.WriteLine("2.4.3 Activar / desactivar");
+        Console.WriteLine("0. Volver");
+        Console.Write("Elige una opción: ");
+        opcion = Console.ReadLine()?.Trim() ?? "";
+
+        switch (opcion)
+        {
+            case "2.4.1":
+                EditUserName();
+                break;
+            case "2.4.2":
+                EditUserContact();
+                break;
+            case "2.4.3":
+                ToggleUserActiveStatus();
+                break;
+            case "0":
+                break;
+            default:
+                Console.WriteLine("Opción no válida. Intenta de nuevo.");
+                break;
+        }
+    } while (opcion != "0");
+}
+
+void RegisterUser() => Console.WriteLine("Acción seleccionada: registrar usuario.");
+void ListUsers() => Console.WriteLine("Acción seleccionada: listar usuarios.");
+void ViewUserDetail() => Console.WriteLine("Acción seleccionada: ver detalle del usuario por ID/documento.");
+void EditUserName() => Console.WriteLine("Acción seleccionada: editar nombre del usuario.");
+void EditUserContact() => Console.WriteLine("Acción seleccionada: editar contacto del usuario.");
+void ToggleUserActiveStatus() => Console.WriteLine("Acción seleccionada: activar/desactivar usuario.");
+void DeleteUser() => Console.WriteLine("Acción seleccionada: eliminar usuario. Validar no permitir si tiene préstamos activos.");
+
 void RunApplication()
 {
     var opcion = "";
@@ -141,6 +223,9 @@ void RunApplication()
         {
             case "1":
                 ShowBooksMenu();
+                break;
+            case "2":
+                ShowUsersMenu();
                 break;
             case "6":
                 break;
