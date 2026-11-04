@@ -374,6 +374,70 @@ void ReportByBook() => Console.WriteLine("Acción seleccionada: generar reporte 
 void ReportOverdue() => Console.WriteLine("Acción seleccionada: generar reporte de préstamos vencidos.");
 void ReportSummary() => Console.WriteLine("Acción seleccionada: generar resumen de la biblioteca.");
 
+void ShowPersistenceMenu()
+{
+    var opcion = "";
+    do
+    {
+        Console.WriteLine("\n--------- GUARDAR / CARGAR DATOS ---------");
+        Console.WriteLine("5.1 Guardar datos");
+        Console.WriteLine("5.2 Cargar datos");
+        Console.WriteLine("5.3 Reiniciar datos");
+        Console.WriteLine("0. Volver");
+        Console.Write("Elige una opción: ");
+        opcion = Console.ReadLine()?.Trim() ?? "";
+
+        switch (opcion)
+        {
+            case "5.1":
+                SaveData();
+                break;
+            case "5.2":
+                LoadData();
+                break;
+            case "5.3":
+                ConfirmResetData();
+                break;
+            case "0":
+                break;
+            default:
+                Console.WriteLine("Opción no válida. Intenta de nuevo.");
+                break;
+        }
+    } while (opcion != "0");
+}
+
+void ConfirmResetData()
+{
+    if (ReadYesNo("¿Confirmas reiniciar los datos? (S/N): ") == "S")
+    {
+        ResetData();
+    }
+    else
+    {
+        Console.WriteLine("Reinicio cancelado.");
+    }
+}
+
+string ReadYesNo(string prompt)
+{
+    while (true)
+    {
+        Console.Write(prompt);
+        var respuesta = (Console.ReadLine() ?? "").Trim().ToUpperInvariant();
+        if (respuesta is "S" or "N")
+        {
+            return respuesta;
+        }
+
+        Console.WriteLine("Respuesta no válida. Ingresa S o N.");
+    }
+}
+
+void SaveData() => Console.WriteLine("Acción seleccionada: guardar datos (simulado, sin persistencia real).");
+void LoadData() => Console.WriteLine("Acción seleccionada: cargar datos (simulado, sin persistencia real).");
+void ResetData() => Console.WriteLine("Acción seleccionada: reiniciar datos (simulado, sin persistencia real).");
+
 void RunApplication()
 {
     var opcion = "";
@@ -396,6 +460,9 @@ void RunApplication()
                 break;
             case "4":
                 ShowSearchReportsMenu();
+                break;
+            case "5":
+                ShowPersistenceMenu();
                 break;
             case "6":
                 break;
