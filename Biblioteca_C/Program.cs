@@ -438,6 +438,18 @@ void SaveData() => Console.WriteLine("Acción seleccionada: guardar datos (simul
 void LoadData() => Console.WriteLine("Acción seleccionada: cargar datos (simulado, sin persistencia real).");
 void ResetData() => Console.WriteLine("Acción seleccionada: reiniciar datos (simulado, sin persistencia real).");
 
+void ConfirmExitAndSave()
+{
+    if (ReadYesNo("¿Guardar antes de salir? (S/N): ") == "S")
+    {
+        SaveData();
+    }
+    else
+    {
+        Console.WriteLine("Saliendo sin guardar.");
+    }
+}
+
 void RunApplication()
 {
     var opcion = "";
@@ -465,6 +477,7 @@ void RunApplication()
                 ShowPersistenceMenu();
                 break;
             case "6":
+                ConfirmExitAndSave();
                 break;
             default:
                 Console.WriteLine("Opción no válida. Intenta de nuevo.");
