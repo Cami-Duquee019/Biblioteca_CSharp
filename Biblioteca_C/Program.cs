@@ -210,6 +210,93 @@ void EditUserContact() => Console.WriteLine("Acción seleccionada: editar contac
 void ToggleUserActiveStatus() => Console.WriteLine("Acción seleccionada: activar/desactivar usuario.");
 void DeleteUser() => Console.WriteLine("Acción seleccionada: eliminar usuario. Validar no permitir si tiene préstamos activos.");
 
+void ShowLoansMenu()
+{
+    var opcion = "";
+    do
+    {
+        Console.WriteLine("\n--------- MENÚ PRÉSTAMOS ---------");
+        Console.WriteLine("3.1 Crear préstamo");
+        Console.WriteLine("3.2 Listar préstamos");
+        Console.WriteLine("3.3 Ver detalle de préstamo (por ID)");
+        Console.WriteLine("3.4 Registrar devolución");
+        Console.WriteLine("3.5 Eliminar préstamo");
+        Console.WriteLine("0. Volver");
+        Console.Write("Elige una opción: ");
+        opcion = Console.ReadLine()?.Trim() ?? "";
+
+        switch (opcion)
+        {
+            case "3.1":
+                CreateLoan();
+                break;
+            case "3.2":
+                ListLoansMenu();
+                break;
+            case "3.3":
+                ViewLoanDetail();
+                break;
+            case "3.4":
+                RegisterReturn();
+                break;
+            case "3.5":
+                DeleteLoan();
+                break;
+            case "0":
+                break;
+            default:
+                Console.WriteLine("Opción no válida. Intenta de nuevo.");
+                break;
+        }
+    } while (opcion != "0");
+}
+
+void ListLoansMenu()
+{
+    var opcion = "";
+    do
+    {
+        Console.WriteLine("\n--------- LISTAR PRÉSTAMOS ---------");
+        Console.WriteLine("3.2.1 Listar todos");
+        Console.WriteLine("3.2.2 Listar activos");
+        Console.WriteLine("3.2.3 Listar cerrados");
+        Console.WriteLine("0. Volver");
+        Console.Write("Elige una opción: ");
+        opcion = Console.ReadLine()?.Trim() ?? "";
+
+        switch (opcion)
+        {
+            case "3.2.1":
+                ListLoansAll();
+                break;
+            case "3.2.2":
+                ListLoansActive();
+                break;
+            case "3.2.3":
+                ListLoansClosed();
+                break;
+            case "0":
+                break;
+            default:
+                Console.WriteLine("Opción no válida. Intenta de nuevo.");
+                break;
+        }
+    } while (opcion != "0");
+}
+
+void CreateLoan()
+{
+    Console.WriteLine("Acción seleccionada: crear préstamo.");
+    Console.WriteLine("Validaciones sugeridas: usuario activo, libro disponible, límites de préstamos y fecha de vencimiento.");
+}
+
+void ListLoansAll() => Console.WriteLine("Acción seleccionada: listar todos los préstamos.");
+void ListLoansActive() => Console.WriteLine("Acción seleccionada: listar préstamos activos.");
+void ListLoansClosed() => Console.WriteLine("Acción seleccionada: listar préstamos cerrados.");
+void ViewLoanDetail() => Console.WriteLine("Acción seleccionada: ver detalle del préstamo por ID.");
+void RegisterReturn() => Console.WriteLine("Acción seleccionada: registrar devolución, marcar préstamo devuelto y libro disponible.");
+void DeleteLoan() => Console.WriteLine("Acción seleccionada: eliminar préstamo. Validar que no esté activo y conservar el historial.");
+
 void RunApplication()
 {
     var opcion = "";
@@ -226,6 +313,9 @@ void RunApplication()
                 break;
             case "2":
                 ShowUsersMenu();
+                break;
+            case "3":
+                ShowLoansMenu();
                 break;
             case "6":
                 break;
