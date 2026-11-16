@@ -1,4 +1,5 @@
 using System;
+using Biblioteca_C.Models;
 
 void ShowMainMenu()
 {
@@ -9,6 +10,7 @@ void ShowMainMenu()
     Console.WriteLine("4. Búsquedas y reportes");
     Console.WriteLine("5. Guardar / Cargar datos");
     Console.WriteLine("6. Salir");
+    Console.WriteLine("7. Demostrar modelos (EV-07)");
 }
 
 void ShowBooksMenu()
@@ -438,6 +440,47 @@ void SaveData() => Console.WriteLine("Acción seleccionada: guardar datos (simul
 void LoadData() => Console.WriteLine("Acción seleccionada: cargar datos (simulado, sin persistencia real).");
 void ResetData() => Console.WriteLine("Acción seleccionada: reiniciar datos (simulado, sin persistencia real).");
 
+void DemostrarObjetosPrueba()
+{
+    var libro1 = new Libro(1, "Cien años de soledad", "Gabriel García Márquez", "978-0307474728", 1967, "Novela");
+    var libro2 = new Libro(2, "El principito", "Antoine de Saint-Exupéry", "978-0156012195", 1943, "Literatura");
+    var usuario1 = new Usuario(1, "Ana Pérez", "10203040", "ana@example.com", "3001234567");
+    var usuario2 = new Usuario(2, "Luis Gómez", "50607080", "luis@example.com", "3107654321");
+    var prestamo = new Prestamo(
+        1,
+        libro1,
+        usuario1,
+        DateTime.Today.AddDays(-10),
+        DateTime.Today.AddDays(-5));
+
+    Console.WriteLine("\n--------- DEMOSTRACIÓN DE MODELOS (EV-07) ---------");
+    Console.WriteLine("\n--- Resúmenes de libros ---");
+    Console.WriteLine(libro1.ResumenCorto());
+    Console.WriteLine(libro2.ResumenCorto());
+    Console.WriteLine("\n--- Detalles completos de libros ---");
+    Console.WriteLine(libro1.DetalleCompleto());
+    Console.WriteLine();
+    Console.WriteLine(libro2.DetalleCompleto());
+    Console.WriteLine("\n--- Resúmenes de usuarios ---");
+    Console.WriteLine(usuario1.ResumenCorto());
+    Console.WriteLine(usuario2.ResumenCorto());
+    Console.WriteLine("\n--- Detalles completos de usuarios ---");
+    Console.WriteLine(usuario1.DetalleCompleto());
+    Console.WriteLine();
+    Console.WriteLine(usuario2.DetalleCompleto());
+    Console.WriteLine("\n--- Préstamo ---");
+    Console.WriteLine(prestamo.ResumenCorto());
+    Console.WriteLine(prestamo.DetalleCompleto());
+    Console.WriteLine("\n--- Validaciones ---");
+    Console.WriteLine($"Libro 1 disponible: {libro1.Disponible}");
+    Console.WriteLine($"Libro 2 disponible: {libro2.Disponible}");
+    Console.WriteLine($"Usuario 1 activo: {usuario1.Activo}");
+    Console.WriteLine($"Usuario 2 activo: {usuario2.Activo}");
+    Console.WriteLine($"Estado del préstamo: {prestamo.Estado}");
+    Console.WriteLine($"¿Está vencido?: {prestamo.EstaVencido()}");
+    Console.WriteLine($"Días transcurridos: {prestamo.DiasTranscurridos()}");
+}
+
 void ConfirmExitAndSave()
 {
     if (ReadYesNo("¿Guardar antes de salir? (S/N): ") == "S")
@@ -478,6 +521,9 @@ void RunApplication()
                 break;
             case "6":
                 ConfirmExitAndSave();
+                break;
+            case "7":
+                DemostrarObjetosPrueba();
                 break;
             default:
                 Console.WriteLine("Opción no válida. Intenta de nuevo.");
